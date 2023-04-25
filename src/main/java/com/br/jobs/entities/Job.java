@@ -33,7 +33,7 @@ public class Job {
     @Field("soft_skills")
     private List<String> softSkills;
 
-    private Optional<BigDecimal> salary;
+    private BigDecimal salary;
 
     private String location;
 
