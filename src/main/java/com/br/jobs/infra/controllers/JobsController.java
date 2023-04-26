@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.jobs.domain.entities.Job;
+import com.br.jobs.domain.services.CloseJobService;
 import com.br.jobs.domain.services.CreateJobService;
 import com.br.jobs.domain.services.FindOneJobService;
 
@@ -29,6 +31,9 @@ public class JobsController {
     @Autowired
     private FindOneJobService findOneJobService;
 
+    @Autowired
+    private CloseJobService closeJobService;
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Job add(@Valid @RequestBody Job job) {
@@ -40,6 +45,12 @@ public class JobsController {
         return this.findOneJobService.execute(id)
                 .map(job -> ResponseEntity.ok(job))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/{id}/close")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void closeJob(@PathVariable String id) {
+        this.closeJobService.execute(id);
     }
 
 }
