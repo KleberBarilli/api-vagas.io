@@ -24,7 +24,7 @@ public class Job {
     private String id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 100, min = 3)
     private String company;
 
     private String image;
