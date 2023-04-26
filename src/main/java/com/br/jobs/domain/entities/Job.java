@@ -1,4 +1,4 @@
-package com.br.jobs.entities;
+package com.br.jobs.domain.entities;
 
 import java.math.BigDecimal;
 import java.util.List;

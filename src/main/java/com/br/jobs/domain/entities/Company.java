@@ -1,4 +1,4 @@
-package com.br.jobs.entities;
+package com.br.jobs.domain.entities;
 
 import java.util.Optional;
 
