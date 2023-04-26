@@ -2,6 +2,7 @@ package com.br.jobs.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.jobs.entities.Job;
 import com.br.jobs.services.CreateJobService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -23,9 +25,8 @@ public class JobsController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    // add bean validation to do
-    public void add() {
-        createJobService.execute();
+    public Job add(@Valid @RequestBody Job job) {
+        return createJobService.execute(job);
     }
 
 }
